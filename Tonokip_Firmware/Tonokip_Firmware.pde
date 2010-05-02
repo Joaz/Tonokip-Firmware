@@ -59,9 +59,8 @@ char *strchr_pointer; // just a pointer to find chars in the cmd string like X, 
 int target_raw = 0;
 int current_raw;
 
-#if E_USE_DC
-  byte dc_extrusion_speed = 0;
-#endif
+byte dc_extrusion_speed = 0;
+
 
 
 void setup()
@@ -282,21 +281,21 @@ inline void process_commands()
     switch( (int)code_value() ) 
     {
       case 101: // M101, reprap specific, extruder on, forward
-#if E_USE_DC
+if(E_USE_DC){
         digitalWrite(E_DIR_PIN, LOW);
         analogWrite(E_STEP_PIN, dc_extrusion_speed);
-#endif
+}
         break;
       case 102: // M102, reprap specific, extruder on, reverse
-#if E_USE_DC
+if(E_USE_DC){
         digitalWrite(E_DIR_PIN, HIGH);
         analogWrite(E_STEP_PIN, dc_extrusion_speed);
-#endif
+}
         break;
       case 103: // M103, reprap specific, extruder off
-#if E_USE_DC
+if(E_USE_DC){
         analogWrite(E_STEP_PIN, 0);
-#endif
+}
 
         break;
       case 104: // M104
@@ -309,12 +308,12 @@ inline void process_commands()
           return; //If RepSnapper sends the M105 then DON'T respond "ok".
         break;
     case 108: // extruder speed for DC motor
-#if E_USE_DC
+if(E_USE_DC){
           if (code_seen('S'))
           {
             dc_extrusion_speed = (byte)code_value();
           }
-#endif
+}
         break;
       case 109: // M109 - Wait for heater to reach target.
         if (code_seen('S')) target_raw = temp2analog(code_value());

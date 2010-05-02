@@ -27,20 +27,20 @@ const bool Z_ENABLE_ON = 1;
 const bool E_ENABLE_ON = 1;
 
 //Disables axis when it's not being used.
-const bool DISABLE_X = false;
-const bool DISABLE_Y = false;
+const bool DISABLE_X = true;
+const bool DISABLE_Y = true;
 const bool DISABLE_Z = true;
 const bool DISABLE_E = false;
 
 //Endstop Settings
-const bool ENDSTOPS_INVERTING = true;
+const bool ENDSTOPS_INVERTING = false;
 const bool min_software_endstops = false; //If true, axis won't move to coordinates less than zero.
 const bool max_software_endstops = true;  //If true, axis won't move to coordinates greater than the defined lengths below.
 const int X_MAX_LENGTH = 200;
 const int Y_MAX_LENGTH = 200;
 const int Z_MAX_LENGTH = 120;
 
-#define E_USE_DC true
+const bool E_USE_DC = true;
 
 #define BAUDRATE 19200
 
